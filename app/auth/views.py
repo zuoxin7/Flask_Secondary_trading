@@ -1,5 +1,5 @@
-from flask import render_template, redirect, request, url_for, flash
-
+from flask import render_template, redirect, request, url_for, flash, session
+from flask import make_response
 from flask_login import login_user, logout_user, login_required
 
 from . import auth
@@ -14,9 +14,11 @@ def login():
         user = User.select().where(User.email == form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            name = User.select().where(User.email == form.email.data).first().username
-            print(name)
-            return redirect(request.args.get('next') or url_for('main.index', name=name))
+            response=make_response()
+            username=User.select().where(User.email == form.email.data).first().username
+            response.set_cookie('username',username)
+            # return redirect(request.args.get('next') or url_for('main.index', name=User.select().where(User.email == form.email.data).first().username)) and response
+            return response and redirect(url_for('main.index'))
         flash('用户名或密码输入错误')
     return render_template('auth/login.html', form=form)
 

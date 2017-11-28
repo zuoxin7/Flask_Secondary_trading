@@ -17,10 +17,7 @@ class RegistrationForm(FlaskForm):
     email = StringField('邮箱',
                         validators=[Required(), Length(1, 64),
                                     Email()])
-    phone = StringField('电话', validators=[Required(),
-                                            Regexp('^[1]{1}[0-9]{10}', 0,
-                                                   '请输入正确的电话号码')])
-    pay = StringField('支付宝账号', validators=[Required(), Length(1, 64)] )
+
     username = StringField('用户名',
                            validators=[Required(),
                                        Length(1, 64),
@@ -31,6 +28,13 @@ class RegistrationForm(FlaskForm):
         validators=[Required(),
                     EqualTo('password2', message='俩次密码不一致')])
     password2 = PasswordField('确认密码', validators=[Required()])
+    phone = StringField('电话', validators=[Required(),
+                                            Regexp('^[1]{1}[0-9]{10}', 0,
+                                                   '请输入正确的电话号码')])
+    pay = StringField('支付宝账号', validators=[Required(), Length(1, 64)] )
+    grade = StringField('年级*')
+    academy = StringField('学院*')
+    major = StringField('专业*')
     submit = SubmitField('注册')
 
     def validate_email(self, field):

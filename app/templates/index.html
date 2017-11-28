@@ -4,6 +4,22 @@
 
 {% block page_content %}
     <div class="page-header">
-        <h1>python web 闲置物品交易</h1><br />
+        <h1>python web 闲置物品交易</h1><br/>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{{ url_for('static',filename='img/1.svg') }}" alt='{{ url_for('static',filename='img/1.svg') }}'>
+                <div class="caption">
+                    <h3>张进</h3>
+                    <p>不要了，便宜卖掉</p>
+                    <p><a href="#" class="btn btn-primary" role="button">我不要</a> <a href="#" class="btn btn-default" role="button">我也不要</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -29,14 +29,22 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">二手商品<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                        {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('goodsissue.issue') }}">发布二手</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">发布二手</a></li>
+                        {% endif %}
                         <li><a href="#">购买二手</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">悬赏任务<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                        {% if current_user.is_authenticated %}
                         <li><a href="#">发布悬赏</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">发布悬赏</a></li>
+                        {% endif %}
                         <li><a href="#">领取任务</a></li>
                     </ul>
                 </li>

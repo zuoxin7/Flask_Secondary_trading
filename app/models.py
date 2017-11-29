@@ -54,34 +54,16 @@ def load_user(user_id):
 #商品表
 class GoodsissueGoods(db.Model):
     id = pw.IntegerField(primary_key=True)  # AutoField?
-    owner = pw.ForeignKeyField(User, null=True)
+    owner = pw.CharField(64)
     name = pw.CharField(64, null=True)
     introduction = pw.CharField(64, null=True)
-    price = pw.FloatField(null=True)
+    category = pw.CharField()
+    price = pw.FloatField()
+    good_trade = pw.BooleanField(default=False)
+    good_tradeID = pw.CharField(null=True)
+    good_comment = pw.CharField(null=True)
     imagefile = pw.CharField(64, null=True)
 
     class Meta:
         managed = False
-        db_table = 'goodsissue_goods'
-
-#商品发布表
-class GoodsissueIssuer(db.Model):
-    id = pw.IntegerField(primary_key=True)  # AutoField?
-    uid = pw.ForeignKeyField(User, db_column='uid', null=True)
-    goods = pw.ForeignKeyField(GoodsissueGoods, null=True)
-    issuedate = pw.DateTimeField(db_column='issueDate', null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'goodsissue_issuer'
-
-#商品销售表
-class GoodsissueSaler(db.Model):
-    id = pw.IntegerField(primary_key=True)  # AutoField?
-    buyer = pw.ForeignKeyField(User, null=True)
-    goods_id = pw.IntegerField(null=True)
-    tradedate = pw.DateTimeField(db_column='tradeDate', null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'goodsissue_saler'
+        db_table = 'goods'

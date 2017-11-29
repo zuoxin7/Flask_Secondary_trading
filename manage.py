@@ -10,7 +10,7 @@ from app import create_app, db
 
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-
+app.config['SECRET_KEY'] = os.urandom(24)
 
 @db.cli.command('createtables', short_help='Create database tables.')
 @click.option('--safe', default=False, is_flag=True,

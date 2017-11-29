@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="/static/css/add_goods.css">
+{% endblock %}
+
+{% block title %}添加商品{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <img style="display: block;width: 60px;height: 60px;margin: 0 auto;" src="{{ url_for('static', filename='images/release-icon.png') }} alt=""/>
+        <img class="wave-fluid" src="{{ url_for('static', filename='images/black-wave.png') }}"/>
+        <img class="release-title" src="{{ url_for('static', filename='images/release-title.png') }}"/>
+    </div>
+{% endblock %}

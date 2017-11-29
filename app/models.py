@@ -56,10 +56,8 @@ class GoodsissueGoods(db.Model):
     id = pw.IntegerField(primary_key=True)  # AutoField?
     owner = pw.ForeignKeyField(User, null=True)
     name = pw.CharField(64, null=True)
-    size = pw.FloatField(null=True)
-    material = pw.CharField(64, null=True)
     introduction = pw.CharField(64, null=True)
-    price = pw.IntegerField(null=True)
+    price = pw.FloatField(null=True)
     imagefile = pw.CharField(64, null=True)
 
     class Meta:

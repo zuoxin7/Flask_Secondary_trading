@@ -21,7 +21,10 @@ def issue():
                                category=form.category.data,
                                price=form.price.data,
                                imagefile=filename)
-        good.save()
-        flash('你已经发布成功')
-        return redirect(url_for('main.index'))
+        try:
+            good.save()
+            flash('你已经发布成功')
+            return redirect(url_for('main.index'))
+        except:
+            flash("发布失败")
     return render_template('add_good.html', form=form)

@@ -11,5 +11,5 @@ class GoodsForm(FlaskForm):
     introduction = TextAreaField('商品介绍')
     category = SelectField('商品类别', choices=[('learn', '学习类'), ('life', '生活类')])
     price = StringField('价格')
-    image = FileField('请上传你的图片', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
+    image = FileField('请上传你的图片(jpg、png、jpeg)', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     submit = SubmitField('发布')

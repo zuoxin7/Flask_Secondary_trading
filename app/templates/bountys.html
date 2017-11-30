@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}二手交易网站{% endblock %}
+
+{% block page_content %}
+    {% for bounty in bountys %}
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>{{ bounty.name }}</h3>
+                <p>悬赏发起人：{{ bounty.wanter }}</p>
+                <p>目标细节：{{ bounty.introduction }}</p>
+                <p>悬赏金：{{ bounty.price }}</p>
+                <p><a href="#" class="btn btn-primary" role="button">领取</a> <a href="#" class="btn btn-default" role="button">联系金主</a></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

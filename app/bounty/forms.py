@@ -9,5 +9,5 @@ class BountyForm(FlaskForm):
     name = StringField('目标商品',
                         validators=[Required(), Length(1, 64),])
     introduction = TextAreaField('目标细节')
-    price = StringField('悬赏金')
+    price = StringField('悬赏金(平台将扣取5%的佣金)')
     submit = SubmitField('发布')

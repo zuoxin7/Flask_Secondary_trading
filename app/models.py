@@ -53,7 +53,6 @@ def load_user(user_id):
 
 #商品表
 class GoodsissueGoods(db.Model):
-    id = pw.IntegerField(primary_key=True)  # AutoField?
     owner = pw.CharField(64)
     name = pw.CharField(64, null=True)
     introduction = pw.CharField(64, null=True)
@@ -64,6 +63,23 @@ class GoodsissueGoods(db.Model):
     good_comment = pw.CharField(null=True)
     imagefile = pw.CharField(64, null=True)
 
+    def __repr__(self):
+        return '<GoodsissueGoods %r>' % self.id
+
     class Meta:
-        managed = False
         db_table = 'goods'
+
+class Bountyissue(db.Model):
+    wanter = pw.CharField(64)
+    name = pw.CharField(64, null=True)
+    introduction = pw.CharField(64, null=True)
+    price = pw.FloatField()
+    bounty_trade = pw.BooleanField(default=False)
+    bounty_tradeID = pw.CharField(null=True)
+    bounty_comment = pw.CharField(null=True)
+
+    def __repr__(self):
+        return '<Bountyissue %r>' % self.id
+
+    class Meta:
+        db_table = 'bountys'

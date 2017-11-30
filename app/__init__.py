@@ -31,8 +31,11 @@ def create_app(config_name):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    from .goodsissue import  goodsissue as goodsissue_blueprint
+    from .goodsissue import goodsissue as goodsissue_blueprint
     app.register_blueprint(goodsissue_blueprint)
+
+    from .bounty import bounty as bounty_blueprint
+    app.register_blueprint(bounty_blueprint)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

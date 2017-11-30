@@ -34,7 +34,7 @@
                         {% else %}
                         <li><a href="{{ url_for('auth.login') }}">发布二手</a></li>
                         {% endif %}
-                        <li><a href="#">购买二手</a></li>
+                        <li><a href="{{ url_for('goodsissue.goods') }}">购买二手</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -45,7 +45,7 @@
                         {% else %}
                         <li><a href="{{ url_for('auth.login') }}">发布悬赏</a></li>
                         {% endif %}
-                        <li><a href="#">领取任务</a></li>
+                        <li><a href="{{ url_for('bounty.bounty') }}">领取任务</a></li>
                     </ul>
                 </li>
             </ul>
@@ -53,7 +53,7 @@
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ request.cookies.get('username') }}<b class="caret"></b>
+                        {{ current_user.username }}<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('auth.logout') }}">登出</a></li>

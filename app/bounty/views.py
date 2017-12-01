@@ -3,7 +3,7 @@ from flask import make_response
 from flask_login import  current_user
 from . import bounty
 from ..models import User, Bountyissue
-from .forms import BountyForm
+from .forms import BountyForm, BountyComment
 
 
 @bounty.route('/issue_bounty', methods=['GET', 'POST'])
@@ -42,3 +42,14 @@ def getbounty(bountyid):
     getbountys = Bountyissue.update(bounty_trade = True, bounty_tradeID = current_user.username).where(Bountyissue.id == bountyid).execute()
     flash('你已经完成领取')
     return render_template('index.html')
+
+#悬赏回馈
+@bounty.route('/bountycomment/<bountyid>', methods=['GET', 'POST'])
+def bountycomment(bountyid):
+    form = BountyComment()
+    bountys = Bountyissue.select().where(Bountyissue.id == bountyid)
+    if form.validate_on_submit():
+        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_comment=form.bounty_comment.data).where(Bountyissue.id == bountyid).execute()
+        flash('你已经完成悬赏反馈')
+        return redirect(url_for('main.index'))
+    return render_template('Bounty_comment.html', bountys=bountys, form=form)

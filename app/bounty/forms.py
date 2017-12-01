@@ -11,3 +11,7 @@ class BountyForm(FlaskForm):
     introduction = TextAreaField('目标细节')
     price = StringField('悬赏金(平台将扣取5%的佣金)')
     submit = SubmitField('发布')
+
+class BountyComment(FlaskForm):
+    bounty_comment = TextAreaField('悬赏回馈')
+    submit = SubmitField('提交')

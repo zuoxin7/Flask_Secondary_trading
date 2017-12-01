@@ -4,7 +4,7 @@ from flask_login import  current_user
 from werkzeug.utils import secure_filename
 from . import goodsissue
 from ..models import User, GoodsissueGoods
-from .forms import GoodsForm
+from .forms import GoodsForm,GoodComment
 
 
 @goodsissue.route('/issue_good', methods=['GET', 'POST'])
@@ -53,3 +53,14 @@ def buygood(goodid):
     buygoods = GoodsissueGoods.update(good_trade = True, good_tradeID = current_user.username).where(GoodsissueGoods.id == goodid).execute()
     flash('你已经完成购买')
     return render_template('index.html')
+
+#商品回馈
+@goodsissue.route('/goodcomment/<goodid>', methods=['GET', 'POST'])
+def goodcomment(goodid):
+    form = GoodComment()
+    goods = GoodsissueGoods.select().where(GoodsissueGoods.id == goodid)
+    if form.validate_on_submit():
+        Good_comment = GoodsissueGoods.update(good_ifcomment=True, good_comment=form.good_comment.data).where(GoodsissueGoods.id == goodid).execute()
+        flash('你已经完成商品反馈')
+        return redirect(url_for('main.index'))
+    return render_template('Good_comment.html', goods=goods, form=form)

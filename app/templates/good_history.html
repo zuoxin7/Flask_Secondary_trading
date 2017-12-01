@@ -17,6 +17,9 @@
                 {% if good.good_trade %}
                 <p>购买者：{{ good.good_tradeID }}</p>
                 {% endif %}
+                {% if good.good_ifcomment %}
+                <p>商品反馈：{{ good.good_comment }}</p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -32,6 +35,11 @@
                 <p>商品类别：{{ good.category }}</p>
                 <p>商品介绍：{{ good.introduction }}</p>
                 <p>价钱：{{ good.price }}</p>
+                {% if good.good_ifcomment %}
+                <p>我的反馈：{{ good.good_comment }}</p>
+                {% else%}
+                <p><a href="{{ url_for('goodsissue.goodcomment', goodid=good.id) }}" class="btn btn-primary" role="button">进行反馈</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

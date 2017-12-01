@@ -60,6 +60,7 @@ class GoodsissueGoods(db.Model):
     price = pw.FloatField()
     good_trade = pw.BooleanField(default=False)
     good_tradeID = pw.CharField(null=True)
+    good_ifcomment = pw.BooleanField(default=False)
     good_comment = pw.CharField(null=True)
     imagefile = pw.CharField(64, null=True)
 
@@ -76,6 +77,7 @@ class Bountyissue(db.Model):
     price = pw.FloatField()
     bounty_trade = pw.BooleanField(default=False)
     bounty_tradeID = pw.CharField(null=True)
+    bounty_ifcomment = pw.BooleanField(default=False)
     bounty_comment = pw.CharField(null=True)
 
     def __repr__(self):

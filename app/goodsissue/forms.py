@@ -13,3 +13,7 @@ class GoodsForm(FlaskForm):
     price = StringField('价格(平台将扣除5%的佣金)')
     image = FileField('请上传你的图片(jpg、png、jpeg)', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     submit = SubmitField('发布')
+
+class GoodComment(FlaskForm):
+    good_comment = TextAreaField('商品回馈')
+    submit = SubmitField('提交')

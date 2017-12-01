@@ -28,8 +28,28 @@ def issue_good():
     return render_template('add_good.html', form=form)
 
 
-
+#商品列表
 @goodsissue.route('/goods', methods=['GET', 'POST'])
 def goods():
-    goods = GoodsissueGoods.select()
-    return render_template('goods.html', goods = goods)
+    goods = GoodsissueGoods.select().where(GoodsissueGoods.good_trade == False)
+    return render_template('goods.html', goods=goods)
+
+#购买记录
+@goodsissue.route('/goodhistory', methods=['GET', 'POST'])
+def goodhistory():
+    mygoods = GoodsissueGoods.select().where(GoodsissueGoods.owner == current_user.username)
+    mybuygoods = GoodsissueGoods.select().where(GoodsissueGoods.good_tradeID == current_user.username)
+    return render_template('good_history.html', mygoods=mygoods, mybuygoods=mybuygoods)
+
+#购买操作
+@goodsissue.route('/goodscore/<goodid>', methods=['GET', 'POST'])
+def buygood(goodid):
+    # tmpgood = GoodsissueGoods.select().where(GoodsissueGoods.id == goodid)
+    # if current_user.username == tmpgood.select(GoodsissueGoods.owner):
+    #     print(tmpgood.select(GoodsissueGoods.owner))
+    #     flash('你不能购买自己的商品')
+    #     return redirect(url_for('goodsissue.goods'))
+    # else:
+    buygoods = GoodsissueGoods.update(good_trade = True, good_tradeID = current_user.username).where(GoodsissueGoods.id == goodid).execute()
+    flash('你已经完成购买')
+    return render_template('index.html')

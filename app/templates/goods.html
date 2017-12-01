@@ -13,7 +13,11 @@
                 <p>商品类别：{{ good.category }}</p>
                 <p>商品介绍：{{ good.introduction }}</p>
                 <p>价钱：{{ good.price }}</p>
-                <p><a href="#" class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">联系卖家</a></p>
+                {% if current_user.is_authenticated %}
+                <p><a href="{{ url_for('goodsissue.buygood', goodid=good.id) }}"  class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">联系卖家</a></p>
+                {% else %}
+                <p><a href="{{ url_for('auth.login') }}"  class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">联系卖家</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

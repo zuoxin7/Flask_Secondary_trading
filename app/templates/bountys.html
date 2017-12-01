@@ -11,7 +11,11 @@
                 <p>悬赏发起人：{{ bounty.wanter }}</p>
                 <p>目标细节：{{ bounty.introduction }}</p>
                 <p>悬赏金：{{ bounty.price }}</p>
-                <p><a href="#" class="btn btn-primary" role="button">领取</a> <a href="#" class="btn btn-default" role="button">联系金主</a></p>
+                {% if current_user.is_authenticated %}
+                <p><a href="{{ url_for('bounty.getbounty', bountyid=bounty.id) }}" class="btn btn-primary" role="button">领取</a> <a href="#" class="btn btn-default" role="button">联系金主</a></p>
+                {% else %}
+                <p><a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">领取</a> <a href="#" class="btn btn-default" role="button">联系金主</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

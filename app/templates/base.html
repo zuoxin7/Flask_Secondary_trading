@@ -50,6 +50,7 @@
                         <li><a href="{{ url_for('bounty.bounty_list') }}">领取任务</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ url_for('main.message') }}">信息发布</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}

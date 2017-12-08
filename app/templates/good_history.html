@@ -10,8 +10,19 @@
             <img src="{{ url_for('static',filename='upload/'+good.imagefile) }}" alt="{{ url_for('static',filename='img/1.svg') }}" style="display: block; height: 200px; width: 320px"/>
             <div class="caption">
                 <h3>{{ good.name }}</h3>
+                {% if good.good_status == 1 %}
+                <p>商品状态：已上架</p>
+                {% elif good.good_status == 2 %}
+                <p>商品状态：进行中</p>
+                {% elif good.good_status == 3 %}
+                <p>商品状态：已下架</p>
+                {% endif %}
                 <p>卖家：{{ good.owner }}</p>
-                <p>商品类别：{{ good.category }}</p>
+                {% if good.category == 'life'  %}
+                <p>商品类别：生活类</p>
+                {% elif good.category == 'learn' %}
+                <p>商品类别：学习类</p>
+                {% endif %}
                 <p>商品介绍：{{ good.introduction }}</p>
                 <p>价钱：{{ good.price }}</p>
                 {% if good.good_trade %}
@@ -31,8 +42,19 @@
             <img src="{{ url_for('static',filename='upload/'+good.imagefile) }}" alt="{{ url_for('static',filename='img/1.svg') }}" style="display: block; height: 200px; width: 320px"/>
             <div class="caption">
                 <h3>{{ good.name }}</h3>
+                {% if good.good_status == 1 %}
+                <p>商品状态：已上架</p>
+                {% elif good.good_status == 2 %}
+                <p>商品状态：进行中</p>
+                {% elif good.good_status == 3 %}
+                <p>商品状态：已下架</p>
+                {% endif %}
                 <p>卖家：{{ good.owner }}</p>
-                <p>商品类别：{{ good.category }}</p>
+                {% if good.category == 'life'  %}
+                <p>商品类别：生活类</p>
+                {% elif good.category == 'learn' %}
+                <p>商品类别：学习类</p>
+                {% endif %}
                 <p>商品介绍：{{ good.introduction }}</p>
                 <p>价钱：{{ good.price }}</p>
                 {% if good.good_ifcomment %}

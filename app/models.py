@@ -94,6 +94,7 @@ class GoodsissueGoods(db.Model):
     good_tradeID = pw.CharField(null=True)
     good_ifcomment = pw.BooleanField(default=False)
     good_comment = pw.CharField(null=True)
+    good_status = pw.IntegerField(default=1)
     imagefile = pw.CharField(64, null=True)
 
     def __repr__(self):
@@ -111,6 +112,8 @@ class Bountyissue(db.Model):
     bounty_tradeID = pw.CharField(null=True)
     bounty_ifcomment = pw.BooleanField(default=False)
     bounty_comment = pw.CharField(null=True)
+    bounty_status = pw.IntegerField(default=1)
+    imagefile = pw.CharField(64, null=True)
 
     def __repr__(self):
         return '<Bountyissue %r>' % self.id

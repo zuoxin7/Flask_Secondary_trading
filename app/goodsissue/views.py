@@ -44,13 +44,7 @@ def goodhistory():
 #购买操作
 @goodsissue.route('/goodscore/<goodid>', methods=['GET', 'POST'])
 def buygood(goodid):
-    # tmpgood = GoodsissueGoods.select().where(GoodsissueGoods.id == goodid)
-    # if current_user.username == tmpgood.select(GoodsissueGoods.owner):
-    #     print(tmpgood.select(GoodsissueGoods.owner))
-    #     flash('你不能购买自己的商品')
-    #     return redirect(url_for('goodsissue.goods'))
-    # else:
-    buygoods = GoodsissueGoods.update(good_trade = True, good_tradeID = current_user.username).where(GoodsissueGoods.id == goodid).execute()
+    buygoods = GoodsissueGoods.update(good_trade = True, good_status = 2, good_tradeID = current_user.username).where(GoodsissueGoods.id == goodid).execute()
     flash('你已经完成购买')
     return render_template('index.html')
 
@@ -60,7 +54,7 @@ def goodcomment(goodid):
     form = GoodComment()
     goods = GoodsissueGoods.select().where(GoodsissueGoods.id == goodid)
     if form.validate_on_submit():
-        Good_comment = GoodsissueGoods.update(good_ifcomment=True, good_comment=form.good_comment.data).where(GoodsissueGoods.id == goodid).execute()
+        Good_comment = GoodsissueGoods.update(good_ifcomment=True, good_status = 3, good_comment=form.good_comment.data).where(GoodsissueGoods.id == goodid).execute()
         flash('你已经完成商品反馈')
         return redirect(url_for('main.index'))
     return render_template('Good_comment.html', goods=goods, form=form)

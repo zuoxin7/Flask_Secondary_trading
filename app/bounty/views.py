@@ -4,16 +4,20 @@ from flask_login import  current_user
 from . import bounty
 from ..models import User, Bountyissue
 from .forms import BountyForm, BountyComment
+from werkzeug.utils import secure_filename
 
 
 @bounty.route('/issue_bounty', methods=['GET', 'POST'])
 def issue_bounty():
     form = BountyForm()
     if form.validate_on_submit():
+        filename = secure_filename(form.image.data.filename)
+        form.image.data.save('app/static/upload/' + filename)
         bounty = Bountyissue(wanter=current_user.username,
                                name=form.name.data,
                                introduction=form.introduction.data,
-                               price=form.price.data)
+                               price=form.price.data,
+                               imagefile=secure_filename(form.image.data.filename))
         try:
             bounty.save()
             flash('你已经发布成功')
@@ -39,7 +43,7 @@ def bountyhistory():
 #领取操作
 @bounty.route('/bountyscore/<bountyid>', methods=['GET', 'POST'])
 def getbounty(bountyid):
-    getbountys = Bountyissue.update(bounty_trade = True, bounty_tradeID = current_user.username).where(Bountyissue.id == bountyid).execute()
+    getbountys = Bountyissue.update(bounty_trade = True, bounty_status = 2, bounty_tradeID = current_user.username).where(Bountyissue.id == bountyid).execute()
     flash('你已经完成领取')
     return render_template('index.html')
 
@@ -49,7 +53,7 @@ def bountycomment(bountyid):
     form = BountyComment()
     bountys = Bountyissue.select().where(Bountyissue.id == bountyid)
     if form.validate_on_submit():
-        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_comment=form.bounty_comment.data).where(Bountyissue.id == bountyid).execute()
+        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_status = 3, bounty_comment=form.bounty_comment.data).where(Bountyissue.id == bountyid).execute()
         flash('你已经完成悬赏反馈')
         return redirect(url_for('main.index'))
     return render_template('Bounty_comment.html', bountys=bountys, form=form)

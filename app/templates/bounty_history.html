@@ -7,18 +7,28 @@
     {% for bounty in mybounds %}
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
+            <img src="{{ url_for('static',filename='upload/'+bounty.imagefile) }}" alt="{{ url_for('static',filename='img/1.svg') }}" style="display: block; height: 200px; width: 320px"/>
             <div class="caption">
                 <h3>{{ bounty.name }}</h3>
+                {% if bounty.bounty_status == 1 %}
+                <p>悬赏状态：已上架</p>
+                {% elif bounty.bounty_status == 2 %}
+                <p>悬赏状态：进行中</p>
+                {% elif bounty.bounty_status == 3 %}
+                <p>悬赏状态：已下架</p>
+                {% endif %}
                 <p>悬赏发起人：{{ bounty.wanter }}</p>
                 <p>目标细节：{{ bounty.introduction }}</p>
                 <p>悬赏金：{{ bounty.price }}</p>
                 {% if bounty.bounty_trade %}
                 <p>领取人：{{ bounty.bounty_tradeID }}</p>
                 {% endif %}
-                {% if bounty.bounty_ifcomment %}
-                <p>我的反馈：{{ bounty.bounty_comment }}</p>
-                {% else%}
-                <p><a href="{{ url_for('bounty.bountycomment', bountyid=bounty.id) }}" class="btn btn-primary" role="button">进行反馈</a></p>
+                {% if bounty.bounty_trade %}
+                    {% if bounty.bounty_ifcomment %}
+                    <p>我的反馈：{{ bounty.bounty_comment }}</p>
+                    {% else%}
+                    <p><a href="{{ url_for('bounty.bountycomment', bountyid=bounty.id) }}" class="btn btn-primary" role="button">进行反馈</a></p>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -28,8 +38,16 @@
     {% for bounty in mygetbountys %}
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
+            <img src="{{ url_for('static',filename='upload/'+bounty.imagefile) }}" alt="{{ url_for('static',filename='img/1.svg') }}" style="display: block; height: 200px; width: 320px"/>
             <div class="caption">
                 <h3>{{ bounty.name }}</h3>
+                {% if bounty.bounty_status == 1 %}
+                <p>悬赏状态：已上架</p>
+                {% elif bounty.bounty_status == 2 %}
+                <p>悬赏状态：进行中</p>
+                {% elif bounty.bounty_status == 3 %}
+                <p>悬赏状态：已下架</p>
+                {% endif %}
                 <p>悬赏发起人：{{ bounty.wanter }}</p>
                 <p>目标细节：{{ bounty.introduction }}</p>
                 <p>悬赏金：{{ bounty.price }}</p>

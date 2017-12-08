@@ -6,3 +6,4 @@ flask-WTF
 flask-pw
 click
 Werkzeug
+requests

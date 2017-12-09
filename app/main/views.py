@@ -7,7 +7,8 @@ from .. import db
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    rank = User.select().order_by(User.num.desc())
+    return render_template('index.html', rank=rank)
 
 
 @main.route('/message', methods=['GET', 'POST'])

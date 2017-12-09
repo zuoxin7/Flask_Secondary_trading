@@ -4,5 +4,10 @@
 {% block title %}二手交易网站{% endblock %}
 
 {% block page_content %}
-
+    <table class="table">
+    <tr><th>排名</th><th>用户名</th><th>发布商品数量</th><th>购买商品数量</th><th>发布悬赏数量</th><th>购买悬赏数量</th></tr>
+    {% for ra in rank %}
+    <tr><td>{{ loop.index }}</td><td>{{ ra.username }}</td><td>{{ ra.num_pushgood }}</td><td>{{ ra.num_buygood }}</td><td>{{ ra.num_pushbounty }}</td><td>{{ ra.num_getbounty }}</td></tr>
+    {% endfor %}
+    </table>
 {% endblock %}

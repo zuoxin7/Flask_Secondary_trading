@@ -24,6 +24,11 @@ class Role(db.Model):
 
 
 class User(UserMixin, db.Model):
+    num_buygood = pw.IntegerField(default=0)
+    num_pushgood = pw.IntegerField(default=0)
+    num_getbounty = pw.IntegerField(default=0)
+    num_pushbounty = pw.IntegerField(default=0)
+    num = pw.IntegerField(default=0)
     email = pw.CharField(64, unique=True, index=True)
     phone = pw.CharField(11, index=True)
     pay = pw.CharField(64, index=True)

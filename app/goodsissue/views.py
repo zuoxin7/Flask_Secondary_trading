@@ -13,6 +13,7 @@ def issue_good():
     if form.validate_on_submit():
         filename = secure_filename(form.image.data.filename)
         form.image.data.save('app/static/upload/' + filename)
+        usernum = User.update(num_pushgood=User.num_pushgood + 1, num=User.num+1).where(User.username == current_user.username).execute()
         good = GoodsissueGoods(owner=current_user.username,
                                name=form.name.data,
                                introduction=form.introduction.data,
@@ -22,7 +23,7 @@ def issue_good():
         try:
             good.save()
             flash('你已经发布成功')
-            return redirect(url_for('main.index'))
+            return redirect('./goods')
         except:
             flash("发布失败")
     return render_template('add_good.html', form=form)
@@ -45,8 +46,9 @@ def goodhistory():
 @goodsissue.route('/goodscore/<goodid>', methods=['GET', 'POST'])
 def buygood(goodid):
     buygoods = GoodsissueGoods.update(good_trade = True, good_status = 2, good_tradeID = current_user.username).where(GoodsissueGoods.id == goodid).execute()
+    usernum = User.update(num_buygood=User.num_buygood + 1, num=User.num+1).where(User.username == current_user.username)
     flash('你已经完成购买')
-    return render_template('index.html')
+    return redirect('./goods')
 
 #商品回馈
 @goodsissue.route('/goodcomment/<goodid>', methods=['GET', 'POST'])
@@ -56,5 +58,5 @@ def goodcomment(goodid):
     if form.validate_on_submit():
         Good_comment = GoodsissueGoods.update(good_ifcomment=True, good_status = 3, good_comment=form.good_comment.data).where(GoodsissueGoods.id == goodid).execute()
         flash('你已经完成商品反馈')
-        return redirect(url_for('main.index'))
+        return redirect('./goodhistory')
     return render_template('Good_comment.html', goods=goods, form=form)

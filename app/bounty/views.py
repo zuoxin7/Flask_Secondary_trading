@@ -13,15 +13,16 @@ def issue_bounty():
     if form.validate_on_submit():
         filename = secure_filename(form.image.data.filename)
         form.image.data.save('app/static/upload/' + filename)
+        usernum = User.update(num_pushbounty = User.num_pushbounty + 1, num=User.num+1).where(User.username == current_user.username)
         bounty = Bountyissue(wanter=current_user.username,
-                               name=form.name.data,
-                               introduction=form.introduction.data,
-                               price=form.price.data,
-                               imagefile=secure_filename(form.image.data.filename))
+                             name=form.name.data,
+                             introduction=form.introduction.data,
+                             price=form.price.data,
+                             imagefile=secure_filename(form.image.data.filename))
         try:
             bounty.save()
             flash('你已经发布成功')
-            return redirect(url_for('main.index'))
+            return redirect('./bounty')
         except:
             flash("发布失败")
     return render_template('add_bounty.html', form=form)
@@ -44,8 +45,9 @@ def bountyhistory():
 @bounty.route('/bountyscore/<bountyid>', methods=['GET', 'POST'])
 def getbounty(bountyid):
     getbountys = Bountyissue.update(bounty_trade = True, bounty_status = 2, bounty_tradeID = current_user.username).where(Bountyissue.id == bountyid).execute()
+    usernum = User.update(num_getbounty=User.num_getbounty + 1, num=User.num+1).where(User.username == current_user.username)
     flash('你已经完成领取')
-    return render_template('index.html')
+    return redirect('./bounty')
 
 #悬赏回馈
 @bounty.route('/bountycomment/<bountyid>', methods=['GET', 'POST'])
@@ -53,7 +55,7 @@ def bountycomment(bountyid):
     form = BountyComment()
     bountys = Bountyissue.select().where(Bountyissue.id == bountyid)
     if form.validate_on_submit():
-        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_status = 3, bounty_comment=form.bounty_comment.data).where(Bountyissue.id == bountyid).execute()
+        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_status = 3 , bounty_comment=form.bounty_comment.data).where(Bountyissue.id == bountyid).execute()
         flash('你已经完成悬赏反馈')
-        return redirect(url_for('main.index'))
+        return redirect('./bountyhistory')
     return render_template('Bounty_comment.html', bountys=bountys, form=form)

@@ -1,91 +1,146 @@
 {% extends "bootstrap/base.html" %}
 
 {% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"
-      type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}"
-      type="image/x-icon">
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"
+          type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}"
+          type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
 {% block title %}Flaskr{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle"
-                    data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">二手交易网</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">二手交易网</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">首页</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">二手商品<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('goodsissue.issue_good') }}">发布二手</a></li>
-                        {% else %}
-                        <li><a href="{{ url_for('auth.login') }}">发布二手</a></li>
-                        {% endif %}
-                        <li><a href="{{ url_for('goodsissue.goods') }}">购买二手</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">悬赏任务<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('bounty.issue_bounty') }}">发布悬赏</a></li>
-                        {% else %}
-                        <li><a href="{{ url_for('auth.login') }}">发布悬赏</a></li>
-                        {% endif %}
-                        <li><a href="{{ url_for('bounty.bounty_list') }}">领取任务</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('main.message') }}">信息发布</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ current_user.username }}<b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('goodsissue.goodhistory') }}">商品历史</a></li>
-                        <li><a href="{{ url_for('bounty.bountyhistory') }}">悬赏历史</a></li>
-                        <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
-                    </ul>
-                </li>
-                {% else %}
-                <li><a href="{{ url_for('auth.login') }}">登录</a></li>
-                {% endif %}
-            </ul>
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">二手交易网</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">二手交易网</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">首页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">二手商品<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% if current_user.is_authenticated %}
+                                <li><a href="{{ url_for('goodsissue.issue_good') }}">发布二手</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('auth.login') }}">发布二手</a></li>
+                            {% endif %}
+                            <li><a href="{{ url_for('goodsissue.goods') }}">购买二手</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">悬赏任务<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% if current_user.is_authenticated %}
+                                <li><a href="{{ url_for('bounty.issue_bounty') }}">发布悬赏</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('auth.login') }}">发布悬赏</a></li>
+                            {% endif %}
+                            <li><a href="{{ url_for('bounty.bounty_list') }}">领取任务</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url_for('main.message') }}">信息发布</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{ current_user.username }}<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('goodsissue.goodhistory') }}">商品历史</a></li>
+                                <li><a href="{{ url_for('bounty.bountyhistory') }}">悬赏历史</a></li>
+                                <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">登录</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block page_content %}{% endblock %}
+
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+
+                        <hr>
+                        <a href="#" target="_blank">二手交易平台</a>
+                        你可以在上面发布一切有关二手交易的信息。
+                        <hr>
+                    </div>
+
+                    <div class="col-sm-2 links">
+                        <h4>快速连接</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">首页</a></li>
+                            <li><a href="#">二手商品</a></li>
+                            <li><a href="#">悬赏任务</a></li>
+                            <li><a href="#">其他</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-sm-3 social">
+                        <h4>关于项目</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">联系我们</a></li>
+                            <li><a href="#">项目地址</a></li>
+                            <li><a href="#">开源许可</a></li>
+                            <li><a href="#">团队介绍</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <h5>扫描二维码</h5>
+                        <img src="{{ url_for('static', filename='img/er.png') }}" style="height: 110px;width: 110px;">
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <div class="copyright text-center">Copyright 2017. All Rights Reserved.
+            </div>
+
+
     </div>
-    {% endfor %}
-    {% block page_content %}{% endblock %}
-</div>
+    </footer>
+    </div>
 {% endblock %}
 
 {% block scripts %}
-	{{ super() }}
+    {{ super() }}
     {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
 {% endblock %}

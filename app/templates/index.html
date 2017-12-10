@@ -132,10 +132,10 @@
                 <div class="col-sm-2 links">
                     <h4>快速连接</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">首页</a></li>
-                        <li><a href="#">二手商品</a></li>
-                        <li><a href="#">悬赏任务</a></li>
-                        <li><a href="#">其他</a>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="{{ url_for('goodsissue.goods') }}">二手商品</a></li>
+                        <li><a href="{{ url_for('bounty.bounty_list') }}">悬赏任务</a></li>
+                        <li><a href="{{ url_for('main.message') }}">信息发布</a>
                         </li>
                     </ul>
                 </div>
@@ -183,10 +183,10 @@
                     <div class="sev-b">
                         <h4>选择下列产品马上在线沟通：</h4>
                         <ul id="zixunUl">
-                            <li><a href="javascript:void(0);">二手商品</a></li>
+                            <li><a href="{{ url_for('goodsissue.goods') }}">二手商品</a></li>
 
-                            <li><a href="javascript:void(0);">赏金任务</a></li>
-                            <li><a href="javascript:void(0);">意见反馈</a></li>
+                            <li><a href="{{ url_for('bounty.bounty_list') }}">赏金任务</a></li>
+                            <li><a href="{{ url_for('main.message') }}">意见反馈</a></li>
 
                             <div class="clear"></div>
                         </ul>

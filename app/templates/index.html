@@ -29,28 +29,94 @@
         </div>
     </div>
 
-
-    <!--排名榜-->
-    <table class="table" style="margin-top: 5%">
-        <tr>
-            <th>排名</th>
-            <th>用户名</th>
-            <th>发布商品数量</th>
-            <th>购买商品数量</th>
-            <th>发布悬赏数量</th>
-            <th>购买悬赏数量</th>
-        </tr>
-        {% for ra in rank %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ ra.username }}</td>
-                <td>{{ ra.num_pushgood }}</td>
-                <td>{{ ra.num_buygood }}</td>
-                <td>{{ ra.num_pushbounty }}</td>
-                <td>{{ ra.num_getbounty }}</td>
-            </tr>
+    <div class="row">
+        <h3>二手商品&nbsp;<span class="label label-default">New</span></h3>
+        <hr>
+        {% for good in goods %}
+            <div class="col-sm-6 col-md-4" style="height: 450px;margin-top: 20px;">
+                <div class="thumbnail" style="height: 100%">
+                    <img src="{{ url_for('static',filename='upload/'+good.imagefile) }}"
+                         alt="{{ url_for('static',filename='img/1.svg') }}"
+                         style="display: block; height: 200px; width: 320px"/>
+                    <div class="caption">
+                        <h3>{{ good.name }}</h3>
+                        <p>卖家：{{ good.owner }}</p>
+                        <p>商品类别：{{ good.category }}</p>
+                        <p>商品介绍：{{ good.introduction }}</p>
+                        <p>价钱：{{ good.price }}</p>
+                        {% if current_user.is_authenticated %}
+                            <p><a href="{{ url_for('goodsissue.buygood', goodid=good.id) }}" class="btn btn-primary"
+                                  role="button">购买</a>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系卖家</button>
+                            </p>
+                        {% else %}
+                            <p><a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">购买</a>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系卖家</button>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </table>
+    </div>
+
+    <div class="row">
+        <h3>&nbsp;<br></h3>
+        <h3>赏金悬赏&nbsp;<span class="label label-default">New</span></h3>
+        <hr>
+        {% for bounty in bountys %}
+            <div class="col-sm-6 col-md-4" style="height: 450px;margin-top: 20px;">
+                <div class="thumbnail" style="height: 100%;">
+                    <img src="{{ url_for('static',filename='upload/'+bounty.imagefile) }}"
+                         alt="{{ url_for('static',filename='img/1.svg') }}"
+                         style="display: block; height: 200px; width: 320px"/>
+                    <div class="caption">
+                        <h3>{{ bounty.name }}</h3>
+                        <p>悬赏发起人：{{ bounty.wanter }}</p>
+                        <p>目标细节：{{ bounty.introduction }}</p>
+                        <p>悬赏金：{{ bounty.price }}</p>
+                        {% if current_user.is_authenticated %}
+                            <p><a href="{{ url_for('bounty.getbounty', bountyid=bounty.id) }}" class="btn btn-primary"
+                                  role="button">领取</a>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系金主</button>
+                            </p>
+                        {% else %}
+                            <p><a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">领取</a>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系金主</button>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <h3>&nbsp;<br></h3>
+        <h3>排名榜 <span class="label label-default">实时更新</span></h3>
+        <hr>
+        <!--排名榜-->
+        <table class="table" style="margin-top: 5%">
+            <tr>
+                <th>排名</th>
+                <th>用户名</th>
+                <th>发布商品数量</th>
+                <th>购买商品数量</th>
+                <th>发布悬赏数量</th>
+                <th>购买悬赏数量</th>
+            </tr>
+            {% for ra in rank %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ ra.username }}</td>
+                    <td>{{ ra.num_pushgood }}</td>
+                    <td>{{ ra.num_buygood }}</td>
+                    <td>{{ ra.num_pushbounty }}</td>
+                    <td>{{ ra.num_getbounty }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
     <footer>
         <div class="container">

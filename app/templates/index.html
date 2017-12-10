@@ -135,23 +135,24 @@
                         <li><a href="/">首页</a></li>
                         <li><a href="{{ url_for('goodsissue.goods') }}">二手商品</a></li>
                         <li><a href="{{ url_for('bounty.bounty_list') }}">悬赏任务</a></li>
-                        <li><a href="{{ url_for('main.message') }}">信息发布</a>
-                        </li>
+                        <li><a href="{{ url_for('main.message') }}">信息发布</a></li>
+                        <li><a href="{{ url_for('main.about') }}">关于我们</a></li>
                     </ul>
                 </div>
 
 
-                <div class="col-sm-3 social">
-                    <h4>关于项目组成员(排名不分先后)</h4>
+                <div class="col-sm-5 social">
+                    <h4>联系我们</h4>
                     <ul class="list-unstyled">
-                        <li>韩景明</li>
-                        <li>解怡楠</li>
-                        <li>廖桉伟</li>
-                        <li>叶子奇</li>
+                        <li>公司名称：人间真情有限责任公司</li>
+                        <li>公司地址：北京市海淀区中关村大街59号</li>
+                        <li>公司邮箱：<a href="mailto:du58@outlook.com?subject=Hello%20again">du58@outlook.com</a></li>
+                        <li>公司法人代表：杜宇鑫</li>
+                        <li>公司核心成员：高岩 叶子奇 韩景明 魏湛卓 崔振山 廖桉伟 解怡楠</li>
                     </ul>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <h5>扫描二维码</h5>
                     <img src="{{ url_for('static', filename='img/er.png') }}" style="height: 110px;width: 110px;">
                 </div>

@@ -4,23 +4,31 @@
 
 {% block page_content %}
     {% for good in goods %}
-    <div class="col-sm-6 col-md-4" style="height: 450px">
-        <div class="thumbnail" style="height: 100%">
-            <img src="{{ url_for('static',filename='upload/'+good.imagefile) }}" alt="{{ url_for('static',filename='img/1.svg') }}" style="display: block; height: 200px; width: 320px"/>
-            <div class="caption">
-                <h3>{{ good.name }}</h3>
-                <p>卖家：{{ good.owner }}</p>
-                <p>商品类别：{{ good.category }}</p>
-                <p>商品介绍：{{ good.introduction }}</p>
-                <p>价钱：{{ good.price }}</p>
-                {% if current_user.is_authenticated %}
-                <p><a href="{{ url_for('goodsissue.buygood', goodid=good.id) }}"  class="btn btn-primary" role="button">购买</a> <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系卖家</button></p>
-                {% else %}
-                <p><a href="{{ url_for('auth.login') }}"  class="btn btn-primary" role="button">购买</a> <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系卖家</button></p>
-                {% endif %}
+        <div class="col-sm-6 col-md-4" style="height: 450px">
+            <div class="thumbnail" style="height: 100%">
+                <img src="{{ url_for('static',filename='upload/'+good.imagefile) }}"
+                     alt="{{ url_for('static',filename='img/1.svg') }}"
+                     style="display: block; height: 200px; width: 320px"/>
+                <div class="caption">
+                    <h3>{{ good.name }}</h3>
+                    <p>卖家：{{ good.owner }}</p>
+                    <p>商品类别：{{ good.category }}</p>
+                    <p>商品介绍：{{ good.introduction }}</p>
+                    <p>价钱：{{ good.price }}</p>
+                    {% if current_user.is_authenticated %}
+                        <p><a href="{{ url_for('goodsissue.buygood', goodid=good.id) }}" class="btn btn-primary"
+                              role="button">购买</a>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系卖家</button>
+                        </p>
+                    {% else %}
+                        <p><a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">购买</a>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系卖家</button>
+                        </p>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
+    {% endfor %}
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -42,5 +50,4 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-    {% endfor %}
 {% endblock %}

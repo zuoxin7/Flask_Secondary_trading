@@ -161,4 +161,100 @@
         <div class="copyright text-center">Copyright 2017. All Rights Reserved.
         </div>
     </footer>
+
+
+    <!--侧边栏-->
+    <div class="cndns-right">
+        <div class="cndns-right-meau meau-sev">
+            <a href="javascript:" class="cndns-right-btn">
+                <span class="demo-icon">&#xe901;</span>
+                <p>
+                    在线<br/>
+                    客服
+                </p>
+            </a>
+            <div class="cndns-right-box">
+                <div class="box-border">
+                    <div class="sev-t">
+                        <span class="demo-icon">&#xe901;</span>
+                        <p>在线客服<i>服务时间：9:00-24:00</i></p>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="sev-b">
+                        <h4>选择下列产品马上在线沟通：</h4>
+                        <ul id="zixunUl">
+                            <li><a href="javascript:void(0);">二手商品</a></li>
+
+                            <li><a href="javascript:void(0);">赏金任务</a></li>
+                            <li><a href="javascript:void(0);">意见反馈</a></li>
+
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <span class="arrow-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="cndns-right-meau meau-contact">
+            <a href="javascript:" class="cndns-right-btn">
+                <span class="demo-icon">&#xe902;</span>
+                <p>
+                    客服<br/>
+                    热线
+                </p>
+            </a>
+            <div class="cndns-right-box">
+                <div class="box-border">
+                    <div class="sev-t">
+                        <span class="demo-icon">&#xe902;</span>
+                        <p>400-123-4567<br/><i>7*24小时客服服务热线</i></p>
+                        <div class="clear"></div>
+                    </div>
+                    <span class="arrow-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="cndns-right-meau meau-code">
+            <a href="javascript:" class="cndns-right-btn">
+                <span class="demo-icon">&#xe903;</span>
+                <p>
+                    关注<br/>
+                    微信
+                </p>
+            </a>
+            <div class="cndns-right-box">
+                <div class="box-border">
+                    <div class="sev-t">
+                        <img src="{{ url_for('static', filename='img/er.png') }}" style="width: 100px;height: 100px;"/>
+                        <i>关注官方微信</i>
+                    </div>
+                    <span class="arrow-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="cndns-right-meau meau-top" id="top-back">
+            <a href="javascript:" class="cndns-right-btn" onclick="topBack()">
+                <span class="demo-icon">&#xe904;</span>
+                <i>顶部</i>
+            </a>
+        </div>
+
+    </div>
+    <script>
+        //置顶图标显示
+        $('#top-back').hide();
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 350) {
+                $("#top-back").fadeIn();
+            }
+            else {
+                $("#top-back").fadeOut();
+            }
+        });
+
+        //置顶事件
+        function topBack() {
+            $('body,html').animate({scrollTop: 0}, 300);
+        }
+    </script>
 {% endblock %}

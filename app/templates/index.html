@@ -4,7 +4,8 @@
 {% block title %}二手交易网站{% endblock %}
 
 {% block page_content %}
-    <div id="myCarousel" class="carousel slide" style="height: 350px;width: 128%;margin-left: -15%;margin-top: -2%" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" style="height: 350px;width: 128%;margin-left: -15%;margin-top: -2%"
+         data-ride="carousel">
         <!-- 轮播（Carousel）指标 -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -50,4 +51,48 @@
             </tr>
         {% endfor %}
     </table>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+
+                    <hr>
+                    <a href="#" target="_blank">二手交易平台</a>
+                    你可以在上面发布一切有关二手交易的信息。
+                    <hr>
+                </div>
+
+                <div class="col-sm-2 links">
+                    <h4>快速连接</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">二手商品</a></li>
+                        <li><a href="#">悬赏任务</a></li>
+                        <li><a href="#">其他</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="col-sm-3 social">
+                    <h4>关于项目</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">项目地址</a></li>
+                        <li><a href="#">开源许可</a></li>
+                        <li><a href="#">团队介绍</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-3">
+                    <h5>扫描二维码</h5>
+                    <img src="{{ url_for('static', filename='img/er.png') }}" style="height: 110px;width: 110px;">
+                </div>
+            </div>
+        </div>
+        <div class="copyright text-center">Copyright 2017. All Rights Reserved.
+        </div>
+    </footer>
 {% endblock %}

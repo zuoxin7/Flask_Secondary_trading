@@ -4,7 +4,7 @@
 
 {% block page_content %}
     {% for good in goods %}
-        <div class="col-sm-6 col-md-4" style="height: 450px">
+        <div class="col-sm-6 col-md-4" style="height: 450px;margin-top: 20px;">
             <div class="thumbnail" style="height: 100%">
                 <img src="{{ url_for('static',filename='upload/'+good.imagefile) }}"
                      alt="{{ url_for('static',filename='img/1.svg') }}"

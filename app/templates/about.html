@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"
+          type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}"
+          type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static',filename='img/back.png') }}");
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+    <div class="col-md-8 col-sm-offset-2 text-center">
+        <div class="row" style="font-size: 3em"><img src="{{ url_for('static',filename='img/logo.png') }}" style="width: 80px;height: 80px;">人间真情流转平台</div>
+    </div>
+    <div class="col-md-8 col-sm-offset-2" style="text-indent: 2em">
+        <h3>人间真情流转平台，由中国人民大学信息资源管理学院政务信息管理专业的国防生打造的校园资源流转平台。志在以闲置转让和悬赏求购的方式在拉和推两个纬度上使中国人民大学内部的闲置资源流动起来，为真正有需要的人服务。 </h3>
+        <h3>
+            我们在做的不是一个二手交易网，也不是一个悬赏任务网，而是将这二者结合，以其为手段打造一个推动小范围内资源流动的引擎。师生可以在人间真情平台上发布闲置转让商品、购买闲置商品，同时可以发布悬赏任务、领取悬赏任务。</h3>
+        <h3>
+            师生注册登录后，可购买商品，对于买不到的商品发布悬赏求购信息，发布悬赏信息后浏览悬赏榜，可以发现自己能够完成的悬赏求购任务，将自己手中的闲置资源加入流转，多余的闲置资源可以通过发布闲置资源的方式将其发布到平台上。人间真情流转平台通过这四个环节不断对用户进行提示和引导，最大程度地使用户手中的资源进入一个良性的闭合循环，最大程度地推动中国人民大学校内资源的流转。</h3>
+    </div>
+{% endblock %}
+

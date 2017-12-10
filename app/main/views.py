@@ -26,3 +26,8 @@ def message():
         return redirect(url_for('.message'))
     posts = Post.select().order_by(Post.timestamp.desc())
     return render_template('messagepush.html', form=form, posts=posts)
+
+
+@main.route('/about')
+def about():
+    return render_template('about.html')

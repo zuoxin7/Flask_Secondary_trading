@@ -14,7 +14,7 @@ def issue_bounty():
         filename = secure_filename(form.image.data.filename)
         form.image.data.save('app/static/upload/' + filename)
         usernum = User.update(num_pushbounty=User.num_pushbounty + 1, num=User.num + 1).where(
-            User.username == current_user.username)
+            User.username == current_user.username).execute()
         bounty = Bountyissue(wanter=current_user.username,
                              name=form.name.data,
                              introduction=form.introduction.data,
@@ -53,7 +53,7 @@ def getbounty(bountyid):
     getbountys = Bountyissue.update(bounty_trade=True, bounty_status=2, bounty_tradeID=current_user.username).where(
         Bountyissue.id == bountyid).execute()
     usernum = User.update(num_getbounty=User.num_getbounty + 1, num=User.num + 1).where(
-        User.username == current_user.username)
+        User.username == current_user.username).execute()
     flash('你已经完成领取')
     return redirect('./bounty')
 

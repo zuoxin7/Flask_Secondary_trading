@@ -52,7 +52,7 @@ def goodhistory():
 @goodsissue.route('/goodscore/<goodid>', methods=['GET', 'POST'])
 def buygood(goodid):
     buygoods = GoodsissueGoods.update(good_trade = True, good_status = 2, good_tradeID = current_user.username).where(GoodsissueGoods.id == goodid).execute()
-    usernum = User.update(num_buygood=User.num_buygood + 1, num=User.num+1).where(User.username == current_user.username)
+    usernum = User.update(num_buygood=User.num_buygood + 1, num=User.num+1).where(User.username == current_user.username).execute()
     flash('你已经完成购买')
     return redirect('./goods')
 

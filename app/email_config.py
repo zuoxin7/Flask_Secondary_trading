@@ -14,7 +14,7 @@
 
 email_config = {
     'username': 'ctudoudou@foxmail.com',
-    'password': 'zupwazzsajzsbgdd',
+    'password': 'xxxxxxxxxxxxxx',
     'contents': '您好！有用户在人间真情悬赏平台咨询您的二手商品/您的悬赏任务，请及时登录平台后处理。',
     'title': '人间真情悬赏平台邮件提醒',
     # 請不要修改以下內容，在不確定的情況下

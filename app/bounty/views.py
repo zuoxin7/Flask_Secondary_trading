@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash, session
 from flask import make_response
-from flask_login import  current_user
+from flask_login import current_user
 from . import bounty
 from ..models import User, Bountyissue
 from .forms import BountyForm, BountyComment
@@ -13,7 +13,8 @@ def issue_bounty():
     if form.validate_on_submit():
         filename = secure_filename(form.image.data.filename)
         form.image.data.save('app/static/upload/' + filename)
-        usernum = User.update(num_pushbounty = User.num_pushbounty + 1, num=User.num+1).where(User.username == current_user.username)
+        usernum = User.update(num_pushbounty=User.num_pushbounty + 1, num=User.num + 1).where(
+            User.username == current_user.username)
         bounty = Bountyissue(wanter=current_user.username,
                              name=form.name.data,
                              introduction=form.introduction.data,
@@ -31,7 +32,12 @@ def issue_bounty():
 @bounty.route('/bounty', methods=['GET', 'POST'])
 def bounty_list():
     bountys = Bountyissue.select().where(Bountyissue.bounty_trade == False)
-    return render_template('bountys.html', bountys = bountys)
+    useremail = []
+    for i in bountys:
+        use = User.select().where(i.wanter == User.username)
+        for t in use:
+            useremail.append(t.email)
+    return render_template('bountys.html', bountys=bountys, useremail=useremail)
 
 
 @bounty.route('/bountyhistory', methods=['GET', 'POST'])
@@ -41,21 +47,26 @@ def bountyhistory():
     return render_template('bounty_history.html', mybounds=mybounds, mygetbountys=mygetbountys)
 
 
-#领取操作
+# 领取操作
 @bounty.route('/bountyscore/<bountyid>', methods=['GET', 'POST'])
 def getbounty(bountyid):
-    getbountys = Bountyissue.update(bounty_trade = True, bounty_status = 2, bounty_tradeID = current_user.username).where(Bountyissue.id == bountyid).execute()
-    usernum = User.update(num_getbounty=User.num_getbounty + 1, num=User.num+1).where(User.username == current_user.username)
+    getbountys = Bountyissue.update(bounty_trade=True, bounty_status=2, bounty_tradeID=current_user.username).where(
+        Bountyissue.id == bountyid).execute()
+    usernum = User.update(num_getbounty=User.num_getbounty + 1, num=User.num + 1).where(
+        User.username == current_user.username)
     flash('你已经完成领取')
     return redirect('./bounty')
 
-#悬赏回馈
+
+# 悬赏回馈
 @bounty.route('/bountycomment/<bountyid>', methods=['GET', 'POST'])
 def bountycomment(bountyid):
     form = BountyComment()
     bountys = Bountyissue.select().where(Bountyissue.id == bountyid)
     if form.validate_on_submit():
-        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_status = 3 , bounty_comment=form.bounty_comment.data).where(Bountyissue.id == bountyid).execute()
+        Bounty_comment = Bountyissue.update(bounty_ifcomment=True, bounty_status=3,
+                                            bounty_comment=form.bounty_comment.data).where(
+            Bountyissue.id == bountyid).execute()
         flash('你已经完成悬赏反馈')
         return redirect('./bountyhistory')
     return render_template('Bounty_comment.html', bountys=bountys, form=form)

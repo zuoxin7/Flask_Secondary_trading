@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/lobibox.css') }}">
+{% endblock %}
 {% block title %}二手交易网站{% endblock %}
 
 {% block page_content %}
@@ -17,11 +20,15 @@
                     {% if current_user.is_authenticated %}
                         <p><a href="{{ url_for('bounty.getbounty', bountyid=bounty.id) }}" class="btn btn-primary"
                               role="button">领取</a>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系金主</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                                    data-whatever="{{ useremail[loop.index - 1] }}">>联系金主
+                            </button>
                         </p>
                     {% else %}
                         <p><a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">领取</a>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">联系金主</button>
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                                    data-whatever="{{ useremail[loop.index - 1] }}">>联系金主
+                            </a>
                         </p>
                     {% endif %}
                 </div>
@@ -43,10 +50,52 @@
                     已经向金主发送短信，请等待金主联系。
                 </div>
                 <div class="modal-footer">
+                    <a type="button" id="model-href" class="btn btn-primary" data-dismiss="modal" href="#">发送</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static',filename='js/notifications.js') }}"></script>
+    <script>
+        $(function () {
+            $('#myModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var recipient = button.data('whatever');
+                var modal = $(this);
+                modal.find('#model-href').attr('href', 'emailpost/' + recipient);
+            });
+            $("#model-href").click(function () {
+                url = $(this)[0].href;
+                $.ajax({
+                    url: url, success: function (result) {
+                        if (result) {
+                            Lobibox.notify(
+                                'success',
+                                {
+                                    size: 'mini',
+                                    delayIndicator: false,
+                                    msg: '邮件发送成功'
+                                }
+                            );
+                        }else {
+                            Lobibox.notify(
+                                'warning',
+                                {
+                                    size: 'mini',
+                                    delayIndicator: false,
+                                    msg: '邮件发送失败'
+                                }
+                            );
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

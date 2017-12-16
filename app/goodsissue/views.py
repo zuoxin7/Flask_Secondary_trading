@@ -7,6 +7,7 @@ from ..models import User, GoodsissueGoods
 from .forms import GoodsForm,GoodComment
 
 
+
 @goodsissue.route('/issue_good', methods=['GET', 'POST'])
 def issue_good():
     form = GoodsForm()
@@ -33,7 +34,12 @@ def issue_good():
 @goodsissue.route('/goods', methods=['GET', 'POST'])
 def goods():
     goods = GoodsissueGoods.select().where(GoodsissueGoods.good_trade == False)
-    return render_template('goods.html', goods=goods)
+    useremail=[]
+    for i in goods:
+        use=User.select().where(i.owner == User.username)
+        for t in use:
+            useremail.append(t.email)
+    return render_template('goods.html', goods=goods,useremail=useremail)
 
 #购买记录
 @goodsissue.route('/goodhistory', methods=['GET', 'POST'])
